@@ -30,7 +30,7 @@ export default function App() {
               <Element
                 is={Container}
                 padding={5}
-                background="bg-gray-200"
+                background="bg-[#f0f5f9] border"
                 canvas
               >
                 <Card />
