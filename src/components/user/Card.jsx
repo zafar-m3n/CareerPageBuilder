@@ -4,6 +4,7 @@ import { Text } from "./Text";
 import { Button } from "./Button";
 import { Container } from "./Container";
 import { ContainerSettings } from "./Container";
+import { ContainerDefaultProps } from "./Container";
 
 export const CardTop = ({ children }) => {
   const {
