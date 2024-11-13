@@ -71,4 +71,5 @@ Container.craft = {
   related: {
     settings: ContainerSettings,
   },
+  name: "Container",
 };

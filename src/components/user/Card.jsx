@@ -59,4 +59,5 @@ Card.craft = {
   related: {
     settings: ContainerSettings,
   },
+  name: "Card",
 };

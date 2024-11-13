@@ -65,6 +65,7 @@ Text.craft = {
   props: {
     text: "This is a Text component",
     fontSize: 20,
+    name: "Text",
   },
   related: {
     settings: TextSettings,

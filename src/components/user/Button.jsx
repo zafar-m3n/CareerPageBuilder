@@ -158,6 +158,7 @@ Button.craft = {
     variant: "contained",
     color: "primary",
     text: "This is a button component.",
+    name: "Button",
   },
   related: {
     settings: ButtonSettings,
