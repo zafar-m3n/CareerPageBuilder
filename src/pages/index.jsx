@@ -9,6 +9,8 @@ import { Container } from "../components/user/Container";
 import { Button } from "../components/user/Button";
 import { Card } from "../components/user/Card";
 import { Text } from "../components/user/Text";
+import { CardTop } from "../components/user/Card";
+import { CardBottom } from "../components/user/Card";
 
 import { Editor, Frame, Element } from "@craftjs/core";
 
@@ -18,7 +20,7 @@ export default function App() {
       <h1 className="text-xl font-semibold text-center mt-4">
         Cleveri Web Page Builder
       </h1>
-      <Editor resolver={{ Card, Button, Text, Container }}>
+      <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
         <div className="grid grid-cols-4 gap-4 pt-4">
           <div className="col-span-4">
             <Topbar />
@@ -28,7 +30,7 @@ export default function App() {
               <Element
                 is={Container}
                 padding={5}
-                background="bg-gray-50"
+                background="bg-gray-200"
                 canvas
               >
                 <Card />

@@ -1,20 +1,53 @@
 import React from "react";
+import { Element, useNode } from "@craftjs/core";
 import { Text } from "./Text";
 import { Button } from "./Button";
 import { Container } from "./Container";
 
-export const Card = ({ background = "bg-gray-200", padding = 4 }) => {
+export const CardTop = ({ children }) => {
+  const {
+    connectors: { connect },
+  } = useNode();
+  return (
+    <div ref={connect} className="text-only">
+      {children}
+    </div>
+  );
+};
+
+CardTop.craft = {
+  rules: {
+    canMoveIn: (incomingNodes) =>
+      incomingNodes.every((node) => node.data.type === Text),
+  },
+};
+
+export const CardBottom = ({ children }) => {
+  const {
+    connectors: { connect },
+  } = useNode();
+  return <div ref={connect}>{children}</div>;
+};
+
+CardBottom.craft = {
+  rules: {
+    canMoveIn: (incomingNodes) =>
+      incomingNodes.every((node) => node.data.type === Button),
+  },
+};
+
+export const Card = ({ background = "bg-gray-50", padding = 20 }) => {
   return (
     <Container background={background} padding={padding}>
-      <div className="text-only mb-4">
+      <Element id="text" is={CardTop} canvas>
         <Text text="Title" fontSize="xl" />
         <Text text="Subtitle" fontSize="lg" />
-      </div>
-      <div className="buttons-only">
+      </Element>
+      <Element id="buttons" is={CardBottom} canvas>
         <Button size="small" color="primary">
           Learn more
         </Button>
-      </div>
+      </Element>
     </Container>
   );
 };
