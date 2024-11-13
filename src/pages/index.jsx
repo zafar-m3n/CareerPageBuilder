@@ -28,7 +28,7 @@ export default function App() {
               <Element
                 is={Container}
                 padding={5}
-                background="bg-gray-200"
+                background="bg-gray-50"
                 canvas
               >
                 <Card />

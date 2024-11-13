@@ -1,4 +1,5 @@
 import React from "react";
+import { useNode } from "@craftjs/core";
 
 export const Button = ({
   size = "md",
@@ -6,7 +7,10 @@ export const Button = ({
   color = "primary",
   children,
 }) => {
-  // Define Tailwind classes based on props
+  const {
+    connectors: { connect, drag },
+  } = useNode();
+
   const baseStyle = "px-4 py-2 rounded";
   const sizeStyle =
     size === "small" ? "text-sm" : size === "large" ? "text-lg" : "text-md";
@@ -17,6 +21,7 @@ export const Button = ({
 
   return (
     <button
+      ref={(ref) => connect(drag(ref))}
       className={`${baseStyle} ${sizeStyle} ${colorStyle} ${variantStyle}`}
     >
       {children}
