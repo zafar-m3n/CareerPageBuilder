@@ -13,13 +13,12 @@ import { CardTop } from "../components/user/Card";
 import { CardBottom } from "../components/user/Card";
 
 import { Editor, Frame, Element } from "@craftjs/core";
+import { Header } from "../components/Header";
 
 export default function App() {
   return (
     <div className="mx-auto">
-      <h1 className="text-xl font-semibold text-center mt-4">
-        Cleveri Web Page Builder
-      </h1>
+      <Header />
       <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
         <div className="grid grid-cols-4 gap-4 pt-4">
           <div className="col-span-4">
