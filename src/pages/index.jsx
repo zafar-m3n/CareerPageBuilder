@@ -1,5 +1,3 @@
-// pages/index.js
-
 import React from "react";
 import { Toolbox } from "../components/Toolbox";
 import { SettingsPanel } from "../components/SettingsPanel";
