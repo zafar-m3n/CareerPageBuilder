@@ -41,7 +41,7 @@ export default function App() {
                   <Element is={Container} canvas></Element>
                 </Frame>
               </div>
-              <div className="col-span-2 bg-white rounded shadow">
+              <div className="col-span-2 bg-white">
                 <Toolbox />
                 <SettingsPanel />
               </div>
