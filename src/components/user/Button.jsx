@@ -72,7 +72,7 @@ export const Button = ({
 };
 
 const Accordion = ({ title, children, isOpen, onToggle }) => (
-  <div className="border rounded mb-2">
+  <div className="border rounded-t">
     <div
       className="p-2 bg-gray-100 cursor-pointer flex justify-between items-center"
       onClick={onToggle}

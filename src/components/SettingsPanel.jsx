@@ -23,7 +23,7 @@ export const SettingsPanel = () => {
   });
 
   return selected ? (
-    <div className="bg-gray-100 mt-2 p-4 rounded-md shadow">
+    <div className="mt-2 p-4 rounded-md shadow">
       <div className="flex flex-col space-y-4">
         <div>
           <p className="text-lg font-semibold">Selected Component</p>
