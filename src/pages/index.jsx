@@ -12,44 +12,54 @@ import { CardBottom } from "../components/user/Card";
 
 import { Editor, Frame, Element } from "@craftjs/core";
 import { Header } from "../components/Header";
+import Sidebar, { SidebarItem } from "../components/Sidebar";
 
 export default function App() {
   return (
     <div className="mx-auto">
-      <Header />
-      <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
-        <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-4">
-            <Topbar />
-          </div>
-          <div className="col-span-3">
-            <Frame>
-              <Element
-                is={Container}
-                padding={5}
-                background="bg-[#f0f5f9] border"
-                canvas
-              >
-                <Card />
-                <Button size="small" text="Click"></Button>
-                <Text fontSize="small" text="Hi world!" />
+      <div className="flex">
+        <Sidebar>
+          <SidebarItem icon="heroicons:rectangle-group" text="Container" />
+          <SidebarItem icon="heroicons:credit-card" text="Card" />
+          <SidebarItem icon="heroicons:rectangle-stack" text="Button" />
+          <SidebarItem icon="heroicons:document-text" text="Text" />
+        </Sidebar>
+        <Editor
+          resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}
+        >
+          <div className="grid grid-cols-4 gap-4">
+            <div className="col-span-4">
+              <Topbar />
+            </div>
+            <div className="col-span-3">
+              <Frame>
                 <Element
                   is={Container}
-                  padding={6}
-                  background="bg-gray-400"
+                  padding={5}
+                  background="bg-[#f0f5f9] border"
                   canvas
                 >
-                  <Text fontSize="small" text="It's me again!" />
+                  <Card />
+                  <Button size="small" text="Click"></Button>
+                  <Text fontSize="small" text="Hi world!" />
+                  <Element
+                    is={Container}
+                    padding={6}
+                    background="bg-gray-400"
+                    canvas
+                  >
+                    <Text fontSize="small" text="It's me again!" />
+                  </Element>
                 </Element>
-              </Element>
-            </Frame>
+              </Frame>
+            </div>
+            <div className="col-span-1 bg-white p-2 rounded shadow">
+              <Toolbox />
+              <SettingsPanel />
+            </div>
           </div>
-          <div className="col-span-1 bg-white p-2 rounded shadow">
-            <Toolbox />
-            <SettingsPanel />
-          </div>
-        </div>
-      </Editor>
+        </Editor>
+      </div>
     </div>
   );
 }
