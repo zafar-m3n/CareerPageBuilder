@@ -9,7 +9,7 @@ export const Topbar = () => {
   };
 
   const handleSerialize = () => {
-    console.log("Serialized JSON to console"); // Placeholder for serialization logic
+    console.log("Serialized JSON to console");
   };
 
   return (

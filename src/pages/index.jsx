@@ -52,33 +52,16 @@ export default function App() {
           <Editor
             resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}
           >
-            <div className="grid grid-cols-4 gap-4">
-              <div className="col-span-4">
+            <div className="grid grid-cols-10">
+              <div className="col-span-10">
                 <Topbar />
               </div>
-              <div className="col-span-3">
+              <div className="col-span-8 m-4">
                 <Frame>
-                  <Element
-                    is={Container}
-                    padding={5}
-                    background="bg-[#f0f5f9] border"
-                    canvas
-                  >
-                    <Card />
-                    <Button size="small" text="Click"></Button>
-                    <Text fontSize="small" text="Hi world!" />
-                    <Element
-                      is={Container}
-                      padding={6}
-                      background="bg-gray-400"
-                      canvas
-                    >
-                      <Text fontSize="small" text="It's me again!" />
-                    </Element>
-                  </Element>
+                  <Element is={Container} canvas></Element>
                 </Frame>
               </div>
-              <div className="col-span-1 bg-white p-2 rounded shadow">
+              <div className="col-span-2 bg-white rounded shadow">
                 <Toolbox />
                 <SettingsPanel />
               </div>
