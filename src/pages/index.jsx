@@ -20,7 +20,7 @@ export default function App() {
     <div className="mx-auto">
       <Header />
       <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
-        <div className="grid grid-cols-4 gap-4 pt-4">
+        <div className="grid grid-cols-4 gap-4">
           <div className="col-span-4">
             <Topbar />
           </div>
