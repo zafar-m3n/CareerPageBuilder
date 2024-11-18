@@ -1,20 +1,26 @@
+import React from "react";
 import Icon from "@/components/ui/Icon";
 import LogoIcon from "@/assets/logo-sm.png";
 import Logo from "@/assets/logo.png";
+import { useEditor, Element } from "@craftjs/core";
+import { Container } from "./user/Container";
+import { Card } from "./user/Card";
+import { Button } from "./user/Button";
+import { Text } from "./user/Text";
 
-export default function Sidebar({ children, expanded, onToggle }) {
+export default function Sidebar({ expanded, onToggle }) {
+  const { connectors } = useEditor();
+
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col justify-between bg-white border-r shadow-sm transition-all duration-300">
-        {/* Top Section */}
         <div className="p-4 pb-2 flex justify-between items-center">
-          {/* Logo */}
           <div
             className={`transition-all duration-300 overflow-hidden ${
               expanded ? "max-w-[128px]" : "max-w-0"
             }`}
           >
-            <img src={Logo} alt="" className="w-full" />
+            <img src={Logo} alt="Cleveri Logo" className="w-full" />
           </div>
           <button
             onClick={onToggle}
@@ -28,17 +34,46 @@ export default function Sidebar({ children, expanded, onToggle }) {
           </button>
         </div>
 
-        {/* Sidebar Items */}
-        <ul className="flex-1 px-3">{children}</ul>
+        <div className="flex-1 px-3 space-y-2">
+          <SidebarItem
+            ref={(ref) =>
+              connectors.create(ref, <Button size="small" text="Click me" />)
+            }
+            icon="heroicons:rectangle-stack"
+            text="Button"
+            expanded={expanded}
+          />
+          <SidebarItem
+            ref={(ref) => connectors.create(ref, <Text text="Hi world" />)}
+            icon="heroicons:document-text"
+            text="Text"
+            expanded={expanded}
+          />
+          <SidebarItem
+            ref={(ref) =>
+              connectors.create(
+                ref,
+                <Element is={Container} padding={20} canvas />
+              )
+            }
+            icon="heroicons:rectangle-group"
+            text="Container"
+            expanded={expanded}
+          />
+          <SidebarItem
+            ref={(ref) => connectors.create(ref, <Card />)}
+            icon="heroicons:credit-card"
+            text="Card"
+            expanded={expanded}
+          />
+        </div>
 
-        {/* Bottom Section */}
         <div
           className={`border-t flex items-center p-3 ${
             expanded ? "flex-row" : "flex-col-reverse"
           }`}
         >
           <img src={LogoIcon} alt="" className="w-10 h-10 rounded-md" />
-          {/* Conditionally Render Text */}
           {expanded && (
             <div className={`overflow-hidden transition-all duration-300 ml-3`}>
               <div className="leading-4">
@@ -55,31 +90,29 @@ export default function Sidebar({ children, expanded, onToggle }) {
   );
 }
 
-export function SidebarItem({ icon, text, expanded, active }) {
-  return (
-    <li
-      className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-        active
-          ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-          : "hover:bg-indigo-50 text-gray-600"
+const SidebarItem = React.forwardRef(({ icon, text, expanded }, ref) => (
+  <li
+    ref={ref}
+    className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
+      expanded
+        ? "hover:bg-indigo-50 text-gray-600"
+        : "text-gray-400 hover:bg-gray-100"
+    }`}
+  >
+    <Icon icon={icon} width={20} />
+    <span
+      className={`transition-all duration-300 ${
+        expanded ? "max-w-[208px] ml-3 opacity-100" : "hidden"
       }`}
     >
-      <Icon icon={icon} width={20} />
-      <span
-        className={`transition-all duration-300 ${
-          expanded ? "max-w-[208px] ml-3 opacity-100" : "hidden"
-        }`}
+      {text}
+    </span>
+    {!expanded && (
+      <div
+        className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-0 -translate-x-3 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
       >
         {text}
-      </span>
-
-      {!expanded && (
-        <div
-          className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-0 -translate-x-3 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
-        >
-          {text}
-        </div>
-      )}
-    </li>
-  );
-}
+      </div>
+    )}
+  </li>
+));

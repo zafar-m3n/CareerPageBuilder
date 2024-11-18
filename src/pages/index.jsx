@@ -11,46 +11,26 @@ import { CardTop } from "../components/user/Card";
 import { CardBottom } from "../components/user/Card";
 
 import { Editor, Frame, Element } from "@craftjs/core";
-import Sidebar, { SidebarItem } from "../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 
 export default function App() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="mx-auto">
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar expanded={expanded} onToggle={() => setExpanded(!expanded)}>
-          <SidebarItem
-            icon="heroicons:rectangle-group"
-            text="Container"
+      <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
+        <div className="flex">
+          {/* Sidebar */}
+          <Sidebar
             expanded={expanded}
+            onToggle={() => setExpanded(!expanded)}
           />
-          <SidebarItem
-            icon="heroicons:credit-card"
-            text="Card"
-            expanded={expanded}
-          />
-          <SidebarItem
-            icon="heroicons:rectangle-stack"
-            text="Button"
-            expanded={expanded}
-          />
-          <SidebarItem
-            icon="heroicons:document-text"
-            text="Text"
-            expanded={expanded}
-          />
-        </Sidebar>
 
-        {/* Main Editor Area */}
-        <div
-          className={`transition-all duration-300 ${
-            expanded ? "w-[calc(100%-256px)]" : "w-[calc(100%-64px)]"
-          }`}
-        >
-          <Editor
-            resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}
+          {/* Main Editor Area */}
+          <div
+            className={`transition-all duration-300 ${
+              expanded ? "w-[calc(100%-256px)]" : "w-[calc(100%-64px)]"
+            }`}
           >
             <div className="grid grid-cols-10">
               <div className="col-span-10">
@@ -66,9 +46,9 @@ export default function App() {
                 <SettingsPanel />
               </div>
             </div>
-          </Editor>
+          </div>
         </div>
-      </div>
+      </Editor>
     </div>
   );
 }
