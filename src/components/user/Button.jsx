@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import ContentEditable from "react-contenteditable";
 import { useNode } from "@craftjs/core";
 
 export const Button = ({
   size = "md",
   variant = "contained",
   color = "primary",
-  children,
+  text = "Click me",
 }) => {
   const {
     connectors: { connect, drag },
-  } = useNode();
+    actions: { setProp },
+    isActive,
+  } = useNode((node) => ({
+    isActive: node.events.selected,
+  }));
+
+  const [editable, setEditable] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) setEditable(false);
+  }, [isActive]);
 
   const baseStyle = "px-4 py-2 rounded";
   const sizeStyle =
@@ -23,8 +34,21 @@ export const Button = ({
     <button
       ref={(ref) => connect(drag(ref))}
       className={`${baseStyle} ${sizeStyle} ${colorStyle} ${variantStyle}`}
+      onClick={() => setEditable(true)}
     >
-      {children}
+      <ContentEditable
+        html={text}
+        disabled={!editable}
+        onChange={(e) =>
+          setProp(
+            (props) =>
+              (props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, ""))
+          )
+        }
+        tagName="span"
+        onBlur={() => setEditable(false)}
+        className="focus:outline-none"
+      />
     </button>
   );
 };
@@ -157,7 +181,7 @@ Button.craft = {
     size: "small",
     variant: "contained",
     color: "primary",
-    text: "This is a button component.",
+    text: "Click me",
     name: "Button",
   },
   related: {

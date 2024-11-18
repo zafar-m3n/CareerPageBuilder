@@ -16,7 +16,7 @@ export const Toolbox = () => {
       <div className="space-y-2">
         <button
           ref={(ref) =>
-            connectors.create(ref, <Button size="small">Click me</Button>)
+            connectors.create(ref, <Button size="small" text="Click me" />)
           }
           className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >

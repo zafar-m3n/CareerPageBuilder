@@ -34,7 +34,7 @@ export default function App() {
                 canvas
               >
                 <Card />
-                <Button size="small">Click</Button>
+                <Button size="small" text="Click"></Button>
                 <Text fontSize="small" text="Hi world!" />
                 <Element
                   is={Container}

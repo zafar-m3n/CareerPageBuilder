@@ -46,9 +46,7 @@ export const Card = ({ background = "bg-gray-50", padding = 20 }) => {
         <Text text="Subtitle" fontSize="lg" />
       </Element>
       <Element id="buttons" is={CardBottom} canvas>
-        <Button size="small" color="primary">
-          Learn more
-        </Button>
+        <Button size="small" color="primary" text="Learn more" />
       </Element>
     </Container>
   );
