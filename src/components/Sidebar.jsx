@@ -1,12 +1,8 @@
-import { useContext, createContext, useState } from "react";
 import Icon from "@/components/ui/Icon";
 import LogoIcon from "@/assets/logo-sm.png";
 import Logo from "@/assets/logo.png";
 
-const SidebarContext = createContext();
-
-export default function Sidebar({ children }) {
-  const [expanded, setExpanded] = useState(false);
+export default function Sidebar({ children, expanded, onToggle }) {
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col justify-between bg-white border-r shadow-sm transition-all duration-300">
@@ -21,7 +17,7 @@ export default function Sidebar({ children }) {
             <img src={Logo} alt="" className="w-full" />
           </div>
           <button
-            onClick={() => setExpanded((curr) => !curr)}
+            onClick={onToggle}
             className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
           >
             {expanded ? (
@@ -33,9 +29,7 @@ export default function Sidebar({ children }) {
         </div>
 
         {/* Sidebar Items */}
-        <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
-        </SidebarContext.Provider>
+        <ul className="flex-1 px-3">{children}</ul>
 
         {/* Bottom Section */}
         <div
@@ -61,9 +55,7 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, active }) {
-  const { expanded } = useContext(SidebarContext);
-
+export function SidebarItem({ icon, text, expanded, active }) {
   return (
     <li
       className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
