@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ContentEditable from "react-contenteditable";
 import { useNode } from "@craftjs/core";
-import { HexColorPicker } from "react-colorful";
 
 export const Button = ({
   size = "md",
   variant = "contained",
-  color = "primary",
   text = "Click me",
   backgroundColor = "#007bff",
   textColor = "#ffffff",
+  borderColor = "#000000",
   marginTop = 5,
   marginLeft = 0,
   marginRight = 0,
@@ -29,18 +28,16 @@ export const Button = ({
     if (!isActive) setEditable(false);
   }, [isActive]);
 
-  const baseStyle = "px-4 py-2 rounded focus:outline-none";
+  const baseStyle = "px-4 py-2 rounded focus:outline-none hover:opacity-75";
   const sizeStyle =
     size === "small" ? "text-sm" : size === "large" ? "text-lg" : "text-md";
-  const variantStyle =
-    variant === "outlined"
-      ? `border text-${color} border-current`
-      : variant === "text"
-      ? `bg-transparent text-${color}`
-      : "";
+
+  // Define dynamic inline styles for colors and borders
   const style = {
     backgroundColor: variant === "contained" ? backgroundColor : "transparent",
-    color: textColor,
+    color: variant === "outlined" ? borderColor : textColor,
+    borderColor: variant === "outlined" ? borderColor : "transparent",
+    borderWidth: variant === "outlined" ? "1px" : "0",
     marginTop: `${marginTop}px`,
     marginLeft: `${marginLeft}px`,
     marginRight: `${marginRight}px`,
@@ -50,7 +47,7 @@ export const Button = ({
   return (
     <button
       ref={(ref) => connect(drag(ref))}
-      className={`${baseStyle} ${sizeStyle} ${variantStyle}`}
+      className={`${baseStyle} ${sizeStyle}`}
       style={style}
       onClick={() => setEditable(true)}
     >
@@ -95,6 +92,7 @@ const ButtonSettings = () => {
     actions: { setProp },
     backgroundColor,
     textColor,
+    borderColor,
     size,
     variant,
     marginTop,
@@ -106,22 +104,27 @@ const ButtonSettings = () => {
     variant: node.data.props.variant,
     backgroundColor: node.data.props.backgroundColor,
     textColor: node.data.props.textColor,
+    borderColor: node.data.props.borderColor,
     marginTop: node.data.props.marginTop,
     marginLeft: node.data.props.marginLeft,
     marginRight: node.data.props.marginRight,
     marginBottom: node.data.props.marginBottom,
   }));
 
-  const [openSection, setOpenSection] = useState(null);
+  const [openSections, setOpenSections] = useState(["sizeVariant"]);
 
   const toggleSection = (section) =>
-    setOpenSection(openSection === section ? null : section);
+    setOpenSections((prev) =>
+      prev.includes(section)
+        ? prev.filter((s) => s !== section)
+        : [...prev, section]
+    );
 
   return (
     <div>
       <Accordion
         title="Size & Variant"
-        isOpen={openSection === "sizeVariant"}
+        isOpen={openSections.includes("sizeVariant")}
         onToggle={() => toggleSection("sizeVariant")}
       >
         <div className="mb-2">
@@ -144,13 +147,24 @@ const ButtonSettings = () => {
         <div>
           <label className="block text-sm font-medium">Button Variant</label>
           <div className="flex space-x-2 mt-1">
-            {["text", "outlined", "contained"].map((v) => (
+            {["outlined", "contained"].map((v) => (
               <label key={v}>
                 <input
                   type="radio"
                   value={v}
                   checked={variant === v}
-                  onChange={() => setProp((props) => (props.variant = v))}
+                  onChange={() =>
+                    setProp((props) => {
+                      props.variant = v;
+                      if (v === "outlined") {
+                        props.borderColor = "#000000"; // Default border & text color
+                        props.textColor = "#000000";
+                      } else if (v === "contained") {
+                        props.backgroundColor = "#007bff"; // Default background
+                        props.textColor = "#ffffff"; // Default text color
+                      }
+                    })
+                  }
                   className="mr-1"
                 />
                 {v.charAt(0).toUpperCase() + v.slice(1)}
@@ -162,58 +176,95 @@ const ButtonSettings = () => {
 
       <Accordion
         title="Colors"
-        isOpen={openSection === "colors"}
+        isOpen={openSections.includes("colors")}
         onToggle={() => toggleSection("colors")}
       >
-        <div className="mb-2">
-          <label className="block text-sm font-medium">
-            Button Background Color
-          </label>
-          <div className="flex items-center space-x-2">
-            <input
-              type="text"
-              value={backgroundColor}
-              onChange={(e) =>
-                setProp((props) => (props.backgroundColor = e.target.value))
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-            <input
-              type="color"
-              value={backgroundColor}
-              onChange={(e) =>
-                setProp((props) => (props.backgroundColor = e.target.value))
-              }
-              className="w-8 h-8 border rounded cursor-pointer"
-            />
+        {variant === "contained" && (
+          <>
+            <div className="mb-2">
+              <label className="block text-sm font-medium">
+                Button Background Color
+              </label>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  value={backgroundColor}
+                  onChange={(e) =>
+                    setProp((props) => (props.backgroundColor = e.target.value))
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+                <input
+                  type="color"
+                  value={backgroundColor}
+                  onChange={(e) =>
+                    setProp((props) => (props.backgroundColor = e.target.value))
+                  }
+                  className="w-8 h-8 border rounded cursor-pointer"
+                />
+              </div>
+            </div>
+            <div className="mb-2">
+              <label className="block text-sm font-medium">
+                Button Text Color
+              </label>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  value={textColor}
+                  onChange={(e) =>
+                    setProp((props) => (props.textColor = e.target.value))
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+                <input
+                  type="color"
+                  value={textColor}
+                  onChange={(e) =>
+                    setProp((props) => (props.textColor = e.target.value))
+                  }
+                  className="w-8 h-8 border rounded cursor-pointer"
+                />
+              </div>
+            </div>
+          </>
+        )}
+        {variant === "outlined" && (
+          <div className="mb-2">
+            <label className="block text-sm font-medium">
+              Border & Text Color
+            </label>
+            <div className="flex items-center space-x-2">
+              <input
+                type="text"
+                value={borderColor}
+                onChange={(e) =>
+                  setProp((props) => {
+                    props.borderColor = e.target.value;
+                    props.textColor = e.target.value; // Sync text with border
+                  })
+                }
+                className="border rounded px-2 py-1 w-full"
+              />
+              <input
+                type="color"
+                value={borderColor}
+                onChange={(e) =>
+                  setProp((props) => {
+                    props.borderColor = e.target.value;
+                    props.textColor = e.target.value; // Sync text with border
+                  })
+                }
+                className="w-8 h-8 border rounded cursor-pointer"
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Button Text Color</label>
-          <div className="flex items-center space-x-2">
-            <input
-              type="text"
-              value={textColor}
-              onChange={(e) =>
-                setProp((props) => (props.textColor = e.target.value))
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-            <input
-              type="color"
-              value={textColor}
-              onChange={(e) =>
-                setProp((props) => (props.textColor = e.target.value))
-              }
-              className="w-8 h-8 border rounded cursor-pointer"
-            />
-          </div>
-        </div>
+        )}
       </Accordion>
 
       <Accordion
         title="Margins"
-        isOpen={openSection === "margins"}
+        isOpen={openSections.includes("margins")}
         onToggle={() => toggleSection("margins")}
       >
         <div className="grid grid-cols-2 gap-2">
@@ -251,6 +302,7 @@ Button.craft = {
     text: "Click me",
     backgroundColor: "#007bff",
     textColor: "#ffffff",
+    borderColor: "#000000",
     marginTop: 5,
     marginLeft: 0,
     marginRight: 0,
