@@ -34,7 +34,7 @@ export default function App() {
                 <Element is={Container} canvas></Element>
               </Frame>
             </div>
-            <div className="col-span-2 space-y-4">
+            <div className="col-span-2 space-y-4 sticky top-0 h-screen overflow-y-auto bg-white border-l shadow-sm">
               <Toolbox />
               <SettingsPanel />
             </div>
