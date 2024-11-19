@@ -39,13 +39,13 @@ export default function Sidebar({ expanded, onToggle }) {
             ref={(ref) =>
               connectors.create(ref, <Button size="small" text="Click me" />)
             }
-            icon="heroicons:rectangle-stack"
+            icon="formkit:button"
             text="Button"
             expanded={expanded}
           />
           <SidebarItem
             ref={(ref) => connectors.create(ref, <Text text="Hi world" />)}
-            icon="heroicons:document-text"
+            icon="icon-park-outline:text"
             text="Text"
             expanded={expanded}
           />
@@ -56,13 +56,13 @@ export default function Sidebar({ expanded, onToggle }) {
                 <Element is={Container} padding={20} canvas />
               )
             }
-            icon="heroicons:rectangle-group"
+            icon="radix-icons:box"
             text="Container"
             expanded={expanded}
           />
           <SidebarItem
             ref={(ref) => connectors.create(ref, <Card />)}
-            icon="heroicons:credit-card"
+            icon="mdi:card-outline"
             text="Card"
             expanded={expanded}
           />
