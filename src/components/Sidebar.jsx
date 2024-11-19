@@ -6,6 +6,7 @@ import { useEditor, Element } from "@craftjs/core";
 import { Container } from "./user/Container";
 import { Button } from "./user/Button";
 import { Text } from "./user/Text";
+import { Image } from "./user/Image";
 
 export default function Sidebar({ expanded, onToggle }) {
   const { connectors } = useEditor();
@@ -55,6 +56,12 @@ export default function Sidebar({ expanded, onToggle }) {
             }
             icon="radix-icons:box"
             text="Container"
+            expanded={expanded}
+          />
+          <SidebarItem
+            ref={(ref) => connectors.create(ref, <Image />)}
+            icon="mdi:image-outline"
+            text="Image"
             expanded={expanded}
           />
         </div>

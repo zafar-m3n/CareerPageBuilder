@@ -6,6 +6,7 @@ import { Topbar } from "../components/Topbar";
 import { Container } from "../components/user/Container";
 import { Button } from "../components/user/Button";
 import { Text } from "../components/user/Text";
+import { Image } from "../components/user/Image";
 
 import { Editor, Frame, Element } from "@craftjs/core";
 import Sidebar from "../components/Sidebar";
@@ -15,7 +16,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen">
-      <Editor resolver={{ Button, Text, Container }}>
+      <Editor resolver={{ Button, Text, Container, Image }}>
         <Sidebar expanded={expanded} onToggle={() => setExpanded(!expanded)} />
         <div
           className={`flex-1 transition-all duration-300 ${
