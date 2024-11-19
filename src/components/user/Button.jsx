@@ -32,7 +32,6 @@ export const Button = ({
   const sizeStyle =
     size === "small" ? "text-sm" : size === "large" ? "text-lg" : "text-md";
 
-  // Define dynamic inline styles for colors and borders
   const style = {
     backgroundColor: variant === "contained" ? backgroundColor : "transparent",
     color: variant === "outlined" ? borderColor : textColor,

@@ -32,7 +32,7 @@ export default function App() {
           <div className="grid grid-cols-10">
             <div className="col-span-8 p-4">
               <Frame>
-                <Element is={Container} canvas></Element>
+                <Element is={Container} width="full" canvas></Element>
               </Frame>
             </div>
             <div className="col-span-2 space-y-4 sticky top-[3rem] h-[calc(100vh-3rem)] overflow-y-auto bg-white border-l shadow-sm">
