@@ -13,7 +13,7 @@ export const Topbar = () => {
   };
 
   return (
-    <div className="px-4 py-2 bg-teal-100 flex items-center justify-between rounded">
+    <div className="px-4 py-2 bg-teal-100 flex items-center justify-between">
       <div className="flex items-center space-x-2">
         <span className="text-sm font-medium">Enable</span>
         <label className="relative inline-flex items-center cursor-pointer">

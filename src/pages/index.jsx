@@ -17,34 +17,26 @@ export default function App() {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="mx-auto">
+    <div className="flex h-screen">
       <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
-        <div className="flex">
-          {/* Sidebar */}
-          <Sidebar
-            expanded={expanded}
-            onToggle={() => setExpanded(!expanded)}
-          />
-
-          {/* Main Editor Area */}
-          <div
-            className={`transition-all duration-300 ${
-              expanded ? "w-[calc(100%-256px)]" : "w-[calc(100%-64px)]"
-            }`}
-          >
-            <div className="grid grid-cols-10 gap-4">
-              <div className="col-span-10">
-                <Topbar />
-              </div>
-              <div className="col-span-8">
-                <Frame>
-                  <Element is={Container} canvas></Element>
-                </Frame>
-              </div>
-              <div className="col-span-2 space-y-4">
-                <Toolbox />
-                <SettingsPanel />
-              </div>
+        <Sidebar expanded={expanded} onToggle={() => setExpanded(!expanded)} />
+        <div
+          className={`flex-1 transition-all duration-300 ${
+            expanded ? "ml-64 pl-4" : "ml-16"
+          }`}
+        >
+          <div className="grid grid-cols-10">
+            <div className="col-span-10">
+              <Topbar />
+            </div>
+            <div className="col-span-8 p-4">
+              <Frame>
+                <Element is={Container} canvas></Element>
+              </Frame>
+            </div>
+            <div className="col-span-2 space-y-4">
+              <Toolbox />
+              <SettingsPanel />
             </div>
           </div>
         </div>

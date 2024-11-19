@@ -12,7 +12,7 @@ export default function Sidebar({ expanded, onToggle }) {
   const { connectors } = useEditor();
 
   return (
-    <aside className="h-screen">
+    <aside className="fixed top-0 left-0 z-50 h-screen">
       <nav className="h-full flex flex-col justify-between bg-white border-r shadow-sm transition-all duration-300">
         <div className="p-4 pb-2 flex justify-between items-center">
           <div
