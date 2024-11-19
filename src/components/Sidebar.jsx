@@ -36,15 +36,13 @@ export default function Sidebar({ expanded, onToggle }) {
 
         <div className="flex-1 px-3 space-y-2">
           <SidebarItem
-            ref={(ref) =>
-              connectors.create(ref, <Button />)
-            }
+            ref={(ref) => connectors.create(ref, <Button />)}
             icon="formkit:button"
             text="Button"
             expanded={expanded}
           />
           <SidebarItem
-            ref={(ref) => connectors.create(ref, <Text text="Hi world" />)}
+            ref={(ref) => connectors.create(ref, <Text />)}
             icon="icon-park-outline:text"
             text="Text"
             expanded={expanded}
