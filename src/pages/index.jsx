@@ -32,16 +32,16 @@ export default function App() {
               expanded ? "w-[calc(100%-256px)]" : "w-[calc(100%-64px)]"
             }`}
           >
-            <div className="grid grid-cols-10">
+            <div className="grid grid-cols-10 gap-4">
               <div className="col-span-10">
                 <Topbar />
               </div>
-              <div className="col-span-8 m-4">
+              <div className="col-span-8">
                 <Frame>
                   <Element is={Container} canvas></Element>
                 </Frame>
               </div>
-              <div className="col-span-2 bg-white">
+              <div className="col-span-2 space-y-4">
                 <Toolbox />
                 <SettingsPanel />
               </div>
