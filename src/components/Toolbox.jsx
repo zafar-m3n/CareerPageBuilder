@@ -1,7 +1,6 @@
 import React from "react";
 import { useEditor, Element } from "@craftjs/core";
 import { Container } from "./user/Container";
-import { Card } from "./user/Card";
 import { Button } from "./user/Button";
 import { Text } from "./user/Text";
 
@@ -38,12 +37,6 @@ export const Toolbox = () => {
           className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Container
-        </button>
-        <button
-          ref={(ref) => connectors.create(ref, <Card />)}
-          className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Card
         </button>
       </div>
     </div>

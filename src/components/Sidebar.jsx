@@ -4,7 +4,6 @@ import LogoIcon from "@/assets/logo-sm.png";
 import Logo from "@/assets/logo.png";
 import { useEditor, Element } from "@craftjs/core";
 import { Container } from "./user/Container";
-import { Card } from "./user/Card";
 import { Button } from "./user/Button";
 import { Text } from "./user/Text";
 
@@ -56,12 +55,6 @@ export default function Sidebar({ expanded, onToggle }) {
             }
             icon="radix-icons:box"
             text="Container"
-            expanded={expanded}
-          />
-          <SidebarItem
-            ref={(ref) => connectors.create(ref, <Card />)}
-            icon="mdi:card-outline"
-            text="Card"
             expanded={expanded}
           />
         </div>

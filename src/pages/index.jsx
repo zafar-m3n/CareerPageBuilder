@@ -5,10 +5,7 @@ import { Topbar } from "../components/Topbar";
 
 import { Container } from "../components/user/Container";
 import { Button } from "../components/user/Button";
-import { Card } from "../components/user/Card";
 import { Text } from "../components/user/Text";
-import { CardTop } from "../components/user/Card";
-import { CardBottom } from "../components/user/Card";
 
 import { Editor, Frame, Element } from "@craftjs/core";
 import Sidebar from "../components/Sidebar";
@@ -18,14 +15,13 @@ export default function App() {
 
   return (
     <div className="flex h-screen">
-      <Editor resolver={{ Card, Button, Text, Container, CardTop, CardBottom }}>
+      <Editor resolver={{ Button, Text, Container }}>
         <Sidebar expanded={expanded} onToggle={() => setExpanded(!expanded)} />
         <div
           className={`flex-1 transition-all duration-300 ${
             expanded ? "ml-64 pl-4" : "ml-16"
           }`}
         >
-          {/* Sticky Topbar */}
           <div className="sticky top-0 z-10 bg-white border-b shadow-sm">
             <Topbar />
           </div>
