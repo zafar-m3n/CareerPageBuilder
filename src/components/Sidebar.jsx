@@ -37,7 +37,7 @@ export default function Sidebar({ expanded, onToggle }) {
         <div className="flex-1 px-3 space-y-2">
           <SidebarItem
             ref={(ref) =>
-              connectors.create(ref, <Button text="Click me" />)
+              connectors.create(ref, <Button />)
             }
             icon="formkit:button"
             text="Button"
