@@ -36,7 +36,7 @@ export default function App() {
               </Frame>
             </div>
             <div className="col-span-2 space-y-4 sticky top-[3rem] h-[calc(100vh-3rem)] overflow-y-auto bg-white border-l shadow-sm">
-              <Toolbox />
+              {/* <Toolbox /> */}
               <SettingsPanel />
             </div>
           </div>
