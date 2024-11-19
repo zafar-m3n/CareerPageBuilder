@@ -25,16 +25,17 @@ export default function App() {
             expanded ? "ml-64 pl-4" : "ml-16"
           }`}
         >
+          {/* Sticky Topbar */}
+          <div className="sticky top-0 z-10 bg-white border-b shadow-sm">
+            <Topbar />
+          </div>
           <div className="grid grid-cols-10">
-            <div className="col-span-10">
-              <Topbar />
-            </div>
             <div className="col-span-8 p-4">
               <Frame>
                 <Element is={Container} canvas></Element>
               </Frame>
             </div>
-            <div className="col-span-2 space-y-4 sticky top-0 h-screen overflow-y-auto bg-white border-l shadow-sm">
+            <div className="col-span-2 space-y-4 sticky top-[3rem] h-[calc(100vh-3rem)] overflow-y-auto bg-white border-l shadow-sm">
               <Toolbox />
               <SettingsPanel />
             </div>
